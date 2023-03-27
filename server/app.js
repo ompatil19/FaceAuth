@@ -1,6 +1,7 @@
 const express = require('express');
 const app=express();
 const mongoose=require('mongoose');
+const { sendEmail } = require('./mail');
 const userModel = require('./models/users');
 const cors=require('cors');
 mongoose.connect("mongodb+srv://ompatil2002:chocolate19@cluster0.n0qwari.mongodb.net/faceauth")
@@ -32,7 +33,11 @@ app.get(`/getUsers/:email`, async (req, res) => {
     res.json(user);
   });
 
-
+  app.get(`/sendmail/:email`, async (req, res) => {
+    const email = req.params.email;
+    await sendEmail(email)
+    res.send(console.log("GG mail sent successfully"))
+  })
 app.listen(1900,()=>{
     console.log("Listening on port 1900...");
 })

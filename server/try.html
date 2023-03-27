@@ -19,8 +19,8 @@
                 /* The payload we want to associate with this user
                 * which is forwarded back to us upon future
                 * authentication of this particular user.*/
-                "whoami": 123456, // Example of dummy ID linked to this particular user
-                "email": "john.doe@example.com"
+                "name": "Om Patil", // Example of dummy ID linked to this particular user
+                "email": "ompatil2002@gmail.com"
                 }
             }).then(userInfo => {
                 // User Successfully Enrolled!
@@ -53,7 +53,7 @@
                 // Grab the arbitrary data you have already linked (if any) to this particular user
                 // during his enrollment via the payload parameter of the enroll() method.
                 console.log("Payload: " + JSON.stringify(userData.payload)) 
-                // {"whoami": 123456, "email": "john.doe@example.com"} set via enroll()
+                // {"whoami": 123456, "email": "prakruthimadhav@gmail.com"} set via enroll()
             }).catch(errCode => {
                 // handle authentication failure. Visit:
                 // https://faceio.net/integration-guide#error-codes

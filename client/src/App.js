@@ -1,13 +1,16 @@
 import './App.css';
 import { useState, useEffect } from "react";
 import Signin from "./components/Signin";
-import Axios from "axios";
-function App() {
+import Login from "./components/Login";
+import React from 'react'
+
+function App(){
   return (
     <>
-    <Signin/>
+    {/* <Signin/> */}
+    <Login/>
     </>
-  );
-  }
+  )
+}
 
-export default App;
+export default App
