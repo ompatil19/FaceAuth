@@ -18,7 +18,6 @@ export default function Signin() {
       console.log('Result:', result);
       if (result) {
         console.log('User is new');
-        // Do something if user is new
         if (isValidEmail(email)) {
           Axios.post("http://localhost:1900/createUser", {
             name,
@@ -30,7 +29,6 @@ export default function Signin() {
       }
       } else {
         console.log('User already exists');
-        // Do something if user already exists
         event.preventDefault();
       }
     })
@@ -100,7 +98,6 @@ export default function Signin() {
           if (data.exists) {
             console.log("User already");
             console.log(data.exists);
-            // a=false;
             return false;
           } else {
             console.log("New user");
