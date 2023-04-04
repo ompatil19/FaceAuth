@@ -9,6 +9,7 @@ const cors = require('cors');
 mongoose.connect("mongodb+srv://ompatil2002:chocolate19@cluster0.n0qwari.mongodb.net/faceauth")
 app.use(express.json());
 app.use(cors());
+
 //Route is used to get all users form databse
 app.get('/getUsers', async (req, res) => {
   try {
@@ -36,7 +37,6 @@ app.get(`/getUsers/:email`, async (req, res) => {
     res.json(err);
   }
 });
-
 //to send emails after successful login
 app.get(`/sendmail/:email`, async (req, res) => {
   const email = req.params.email;
