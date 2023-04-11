@@ -122,9 +122,10 @@ export default function Signin() {
           <div className="container">
           <img src="images/signup.png" alt="" />
                 <div className="form">
+                    <>
                 <i class="fa-solid fa-user"></i>
                     <h3>Sign Up</h3>
-                    <p>Sign up to take advantages of face auth</p>
+                    <p>Sign up easily with FaceAuth for secure and convenient facial recognition sign-in.</p>
                     <form>
                         <input type="text" placeholder='Enter your name: ' onChange={changename} />
                         <input type="text" placeholder='Enter your password: ' onChange={changepass} />
@@ -134,6 +135,7 @@ export default function Signin() {
                     </form>
                         {/* {submission &&<input type="button" value="Enroll" onClick={newuser} id='btn'/>} */}
                     {/* {submission && <button onClick={newuser} id="btn">Enroll new user</button>} */}
+                    </>
                 </div>
 
                 

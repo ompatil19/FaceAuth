@@ -25,11 +25,16 @@ body{
 
 .container .form{
     width: 500px;
-    height: 70vh;
+    /* display: flex; */
+    flex-direction: column;
+    height: 60vh;
+    /* justify-content: center; */
     background: #0f0f0f;
     color: aliceblue;
     text-align: center;
+    margin-top: 60px;
     padding-top: 10px;
+    align-items: center;
 }
 .container .form  i{
     padding-top: 20px;
@@ -80,8 +85,8 @@ body{
     justify-content: center;
     align-items: center;
     vertical-align: middle;
-    height: 80vh;
-    width: 500px;
+    height: 75vh;
+    width: 40vw;
 }
 .container form{
     width: 100px;
