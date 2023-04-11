@@ -132,7 +132,8 @@ export default function Signin() {
                         <input type="button" value="Submit" onClick={createnewuser} id='btn'/>
 
                     </form>
-                    {submission && <button onClick={newuser}>Enroll new user</button>}
+                        {/* {submission &&<input type="button" value="Enroll" onClick={newuser} id='btn'/>} */}
+                    {/* {submission && <button onClick={newuser} id="btn">Enroll new user</button>} */}
                 </div>
 
                 
