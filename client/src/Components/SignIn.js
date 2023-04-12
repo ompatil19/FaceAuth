@@ -66,6 +66,7 @@ export default function Signin() {
     //     console.log("Password is correct")
     // }
     const newuser = () => {
+        console.log("enter new user function");
         faceio.enroll({
             "locale": "auto", // Default user locale
             "payload": {
@@ -88,10 +89,12 @@ export default function Signin() {
             console.log(JSON.stringify(userInfo.payload));
             // handle success, save the facial ID, redirect to dashboard...
         }).catch(errCode => {
+            console.log("error");
             // handle enrollment failure. Visit:
             // https://faceio.net/integration-guide#error-codes
             // for the list of all possible error codes
         })
+        console.log("Exited new user function");
     }
     let checkuser = (e) => {
         if (e) {
@@ -131,10 +134,10 @@ export default function Signin() {
                         <input type="text" placeholder='Enter your password: ' onChange={changepass} />
                         <input type="text" placeholder='Enter your email: ' onChange={changemail} />
                         <input type="button" value="Submit" onClick={createnewuser} id='btn'/>
-                        {submission && <button onClick={newuser} id="btn">Enroll new user</button>}
+                        {/* {submission && <button onClick={newuser} id="btn">Enroll new user</button>} */}
+                        {submission && <input type="button" value="Enroll" onClick={newuser} id="btn"/>}
 
                     </form>
-                        {/* {submission &&<input type="button" value="Enroll" onClick={newuser} id='btn'/>} */}
                     </>
                 </div>
 
