@@ -131,10 +131,10 @@ export default function Signin() {
                         <input type="text" placeholder='Enter your password: ' onChange={changepass} />
                         <input type="text" placeholder='Enter your email: ' onChange={changemail} />
                         <input type="button" value="Submit" onClick={createnewuser} id='btn'/>
+                        {submission && <button onClick={newuser} id="btn">Enroll new user</button>}
 
                     </form>
                         {/* {submission &&<input type="button" value="Enroll" onClick={newuser} id='btn'/>} */}
-                    {/* {submission && <button onClick={newuser} id="btn">Enroll new user</button>} */}
                     </>
                 </div>
 
