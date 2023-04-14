@@ -39,7 +39,7 @@ export default function Login() {
       <div className="container">
         <div className="left">
           <h1>FaceAuth</h1>
-          <h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint, voluptatum.</h6>
+          <h6>Verify instantly with FaceAuth Authentication.</h6>
           {/* <button onClick={authenticateuser} className='login'>Authenticate</button> */}
           <button id="button" onClick={authenticateuser} className='login'>Authenticate User</button>
         </div>
