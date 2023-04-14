@@ -19,13 +19,17 @@ To deploy this project:
 ```bash
   npm install 
 ```
-4. To launch the app on the client terminal, run:
+4.To start sending mails on successful authentication do the following steps
+
+head to /server/mail.js replace the ```client ID```,```client Secret``` ,```Access token```,```your email``` with the respective credentials and the mailing system should start working
+
+5. To launch the app on the client terminal, run:
 
 ```bash
   npm start
 ```
 
-5. To start the server, run:
+6. To start the server, run:
 
 ```bash
   nodemon app.js
