@@ -10,8 +10,16 @@ h2{
     padding-top: 30px;
 }
 
-p{
-    font-size: 15px;
+p{  
+    margin: 50px auto;
+    margin-bottom: 0px;
+    font-size: 15px ;
     font-weight: 300;
     text-align: center;
+}
+
+@media (max-width: 784px){
+    p{
+        font-size: 13px;
+    }
 }

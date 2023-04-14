@@ -17,14 +17,14 @@ function HeroSection() {
         >
           Sign Up
         </Button>
-        <Button
+        {/* <Button
           className='btns'
-          buttonStyle='btn--primary'
+          buttonStyle='btn--outline'
           buttonSize='btn--large'
           onClick={console.log('hey')}
         >
           Log In
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

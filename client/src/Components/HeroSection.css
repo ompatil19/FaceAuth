@@ -27,7 +27,7 @@ video {
     font-weight: 700;
     margin-top: -50px;
     letter-spacing: 3px;
-    font-family: 'Poppins', sans-serif;
+    /* font-family: 'Poppins', sans-serif; */
     font-family: 'Montserrat', sans-serif;
   }
   
@@ -43,6 +43,8 @@ video {
   .hero-btns {
     margin-top: 100px;
   }
+  
+
   
   .hero-btns .btn {
     margin: 0px 35px;
