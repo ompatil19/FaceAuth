@@ -13,7 +13,7 @@ function Home(){
     return (
         <div className="homeContainer">
             <h2>What is FaceAuth?</h2>
-            <p>FaceAuth uses face authentication technology to accurately track attendance. Users simply<br/> need to scan their faces, and the system will automatically log their attendance. This<br/> helps to streamline the attendance tracking process and eliminate the need for manual recording.</p>
+            <p>FaceAuth is a powerful software that helps you sign in and authenticate users quickly and securely using facial recognition technology. With FaceAuth, you can streamline your authentication process, increase security, and provide a convenient sign-in experience for your users. Get started today and see the benefits for yourself!</p>
             <Card/>
         </div>
     )

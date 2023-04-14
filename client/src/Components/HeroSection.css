@@ -21,18 +21,24 @@ video {
   
   .hero-container > h1 {
     color: #fff;
-    font-size: 47px;
+    font-size: 31px;
     text-align: center;
     /* font-weight: 800; */
     font-weight: 700;
     margin-top: -50px;
     letter-spacing: 3px;
+<<<<<<< HEAD
     /* font-family: 'Poppins', sans-serif; */
+=======
+    line-height: 1.2em;
+    width: 75%;
+    font-family: 'Poppins', sans-serif;
+>>>>>>> 9af571ee4a80ac98ed78189bd7fc1a13c23f5b98
     font-family: 'Montserrat', sans-serif;
   }
   
   .hero-container > p {
-    margin-top: 80px;
+    margin: 80px 0px 0px 0px;
     color: #fff;
     text-align: center;
     font-size: 24px;
