@@ -7,7 +7,7 @@ function HeroSection() {
   return (
     <div className='hero-container'>
       <video src='/videos/video1.mp4' autoPlay loop muted />
-      <h1>FaceAuth - Secure and Convenient Facial Recognition Sign-in and Authentication</h1>
+      <h1>FaceAuth - Secure Facial Recognition Sign-in and Authentication</h1>
       <p>Get started with FaceAuth today!</p>
       <div className='hero-btns'>
         <Button
