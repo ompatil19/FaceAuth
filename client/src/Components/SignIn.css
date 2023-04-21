@@ -77,8 +77,15 @@ body{
     border: 2px solid #1A5F7A;
     transition: .5s all ;
 }
-
-
+.enroll-btn{
+    font-size: 15px;
+    padding: 10px 20px;
+    width: 300px;
+    border-radius: 20px;
+    background-color: lightblue;
+    color: black;
+    margin: 10px 0px;
+}
 
 .container img{
     display: flex;

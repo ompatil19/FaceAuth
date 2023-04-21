@@ -4,10 +4,11 @@ const app = express();
 const mongoose = require('mongoose');
 const { sendEmail, sendOtpVerificationEmail } = require('./mail');
 const userModel = require('./models/users');
+const otpModel = require('./models/otp');
 const otp = require('./mail');
 const axios = require('axios');
 const cors = require('cors');
-mongoose.connect("mongodb+srv://ompatil2002:chocolate19@cluster0.n0qwari.mongodb.net/faceauth")
+mongoose.connect(process.env.DATABASE)
 app.use(express.json());
 app.use(cors());
 const bcrypt = require('bcrypt');
@@ -96,6 +97,7 @@ app.post("/verifyOTP/:otp", async (req, res) => {
   try {
 
     const otpVerification = await otpModel.findOne({ otp: otp_entered });
+    console.log("otpVerification", otpVerification);
 
     if (otpVerification === null) {
       //if it's null or incorrect
@@ -117,7 +119,7 @@ app.post("/verifyOTP/:otp", async (req, res) => {
     console.log("type of otp given", typeof (otpVerification.expiresAt));
 
   } catch (error) {
-    res.send(console.log("Internal server error"))
+    res.send(console.log("Internal server error",error))
   }
 });
 

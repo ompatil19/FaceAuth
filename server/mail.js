@@ -1,38 +1,34 @@
 const nodemailer=require('nodemailer');
 const { google } = require('googleapis');
 const otpModel = require('./models/otp');
+require('dotenv').config();
+const { gmail } = require('googleapis/build/src/apis/gmail');
 
-const CLIENT_ID="your client id"
-
-const CLIENT_SECRET="Your Client Secret"
-
-const CLIENT_ID_2 = "879621168598-5k9okqkbnttkclniq1vh6gplie53notl.apps.googleusercontent.com"
-
-const CLIENT_SECRET_2 = "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"
-
+const CLIENT_ID=process.env.CLIENT_ID;
+const CLIENT_SECRET=process.env.CLIENT_SECRET;
 const REDIRECT_URL = "https://developers.google.com/oauthplayground"
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
-const REFRESH_TOKEN = "1//04jWhs0l8oihgCgYIARAAGAQSNwF-L9IrUjVRj-UrbfhjUYLFMhkrbKAzP63M7zJS3DoU4R-u3dTyovhex6tN0EMxTtEukFgHAD8"
-
-const oAuth2Client = new google.auth.OAuth2(CLIENT_ID_2, CLIENT_SECRET_2, REDIRECT_URL)
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URL)
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
-let otp = Math.floor(1000 + Math.random() * 9000);
+let otp = Math.floor(100000 + Math.random() * 900000);
 
 async function sendEmail(e,time){
     try{
+        const accessToken = await oAuth2Client.getAccessToken();
         const transport=nodemailer.createTransport({
             service:"gmail",
             auth:{
                 type:"OAuth2",
-                user:"sender email",
+                user:process.env.USER,
                 clientid: CLIENT_ID,
                 clientsecret: CLIENT_SECRET,
                 //Have to keep updating access token every one hour
-                accessToken:"your access token",
+                accessToken:accessToken
             }
         });
         const mailOptions={
-            from:"sender email",
+            from:process.env.USER,
             to:e,
             subject:"Authentication Email",
             text: "hello",
@@ -54,34 +50,34 @@ async function sendOtpVerificationEmail(email, res) {
             service: "gmail",
             auth: {
                 type: "OAuth2",
-                user: "prakruthimadhav@gmail.com",
-                clientId: CLIENT_ID_2,
-                clientSecret: CLIENT_SECRET_2,
+                user: process.env.USER,
+                clientId: CLIENT_ID,
+                clientSecret: CLIENT_SECRET,
                 refreshToken: REFRESH_TOKEN,
                 accessToken: accessToken
             }
         });
-        
-        const newOtpVerification = await new otpModel({
+        const newOtpVerification = new otpModel({
             //otp:await bcrypt.hash(otp, 10),
             otp:otp,
             createdAt: Date.now(),
-            expiresAt: Date.now() + 360000,
+            expiresAt: Date.now() + 900000,
         });
         await newOtpVerification.save();
 
         console.log("EMAIL", email);
         const options = {
-            from: "prakruthimadhav@gmail.com",
+            from: process.env.USER,
             to: email,
             subject: "Verify your Email",
-            html: `<h4> Enter! ${otp} to verify</h4>`
+            html: `<h1> Your FaceAuth Member Profile code</h1> <br> <h4> Here's the one-time verification code you requested: <h2> ${otp} </h2>This code expires after 15 minutes. If you've already received this code or don't need it any more, ignore this email. </h4>`
         }
         await transporter.sendMail(options).catch(err => console.log(err));       
         res.send(console.log("HURRAY otp mail sent successfully"))
     } catch (error) {
       
-        res.send(console.log("BOOO otp mail sent failed"))
+        // res.send(console.log("BOOO otp mail sent failed"))
+        res.send(console.log("error while sending otp is", error));
     }
 }
 

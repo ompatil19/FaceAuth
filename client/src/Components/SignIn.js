@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
+import { GoogleLogin } from "react-google-login";
 import Axios from "axios";
 import '../App.css';
 import './SignIn.css'
 import faceIO from "@faceio/fiojs"
-const faceio = new faceIO("fioab1bd");
-import { GoogleLogin } from "react-google-login";
+const faceio = new faceIO("fioa33f3");
 
-const clientid = "879621168598-5k9okqkbnttkclniq1vh6gplie53notl.apps.googleusercontent.com";
+// const clientid = "879621168598-5k9okqkbnttkclniq1vh6gplie53notl.apps.googleusercontent.com";
+const clientid =process.env.REACT_APP_CLIENT_ID;
 
 export default function Signin() {
 
@@ -15,9 +16,10 @@ export default function Signin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [submission, setSubmission] = useState(false);
+    const [otpDisplay, setotpDisplay] = useState(false);
     const [checkOtp, setcheckOtp] = useState("");
 
-    useEffect(() => { console.log("Tried changing submission") }, [submission]);
+    useEffect(() => { console.log("Tried changing submission") }, [submission,otpDisplay]);
 
     const changename = (event) => {
         setName(event.target.value);
@@ -60,7 +62,7 @@ export default function Signin() {
         }).then(userInfo => {
             // User Successfully Enrolled!
             alert(
-                `User Successfully Enrolled! Details:
+            `User Successfully Enrolled! Details:
           Unique Facial ID: ${userInfo.facialId}
           Enrollment Date: ${userInfo.timestamp}
           Gender: ${userInfo.details.gender}
@@ -69,8 +71,8 @@ export default function Signin() {
             console.log(userInfo);
             console.log(JSON.stringify(userInfo.payload));
             // handle success, save the facial ID, redirect to dashboard...
-        }).catch(errCode => {
-            console.log("error");
+        }).catch(err => {
+            console.log("error",err);
             // handle enrollment failure. Visit:
             // https://faceio.net/integration-guide#error-codes
             // for the list of all possible error codes
@@ -116,26 +118,25 @@ export default function Signin() {
                     email,
                     password
                 })
-                console.log("submission before is ", submission);
                 setSubmission(true);
-                console.log("submission after is ", submission);
             }
         }
         catch (error) {
             console.log("ayyoo" + error);
         }
     };
-
+    
     const onSuccess = async (res) => {
         console.log("Google Login success user:", res.profileObj);
         const google = res.profileObj;
-        let name = google.name;
-        let email = google.email;
+        let thisname = google.name;
+        let thisemail = google.email;
         console.log(name);
         console.log(email);
-        setEmail(email);
-        setName(name);
+        setEmail(thisemail);
+        setName(thisname);
         await Axios.post(`http://localhost:1900/sendveriemail/${email}`);
+        setotpDisplay(true);
 
     };
 
@@ -154,7 +155,7 @@ export default function Signin() {
 
                 if (result) {
                     console.log('User is new');
-
+                    
                     if (isValidEmail(email)) {
 
                         Axios.post(`http://localhost:1900/sendveriemail/${email}`);
@@ -166,11 +167,12 @@ export default function Signin() {
             .catch((err) => {
                 console.error(err);
             });
-    }
-    const handleSubmit2 = (event) => {
-        event.preventDefault();
+        }
+        const handleSubmit2 = (event) => {
+            event.preventDefault();
         console.log("submit clicked");
         createnewuser();
+        setotpDisplay(true);
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -188,14 +190,16 @@ export default function Signin() {
                         <i class="fa-solid fa-user"></i>
                         <h3>Sign Up</h3>
                         <p>Sign up easily with FaceAuth for secure and convenient facial recognition sign-in.</p>
+                        {!otpDisplay &&
+                        <>
                         <form onSubmit={handleSubmit}>
                             <input type="text" placeholder='Enter your name: ' onChange={changename} />
                             <input type="text" placeholder='Enter your password: ' onChange={changepass} />
                             <input type="text" placeholder='Enter your email: ' onChange={changemail} />
-                            <input type="button" value="Submit" id='btn' />
+                            <input type="submit" value="Submit" id='btn' />
 
                         </form>
-                        <div id="signInGoogle">
+                        <div id="signInGoogle" className='google-button'>
                             <GoogleLogin
                                 clientId={clientid}
                                 buttonText="SignIn with Google"
@@ -206,13 +210,15 @@ export default function Signin() {
                             >
                             </GoogleLogin>
                         </div>
+                        </>
+                        }
                         {/* enter otp and verify otp on clicking button */}
-                        <form onSubmit={handleSubmit2}>
+                        {otpDisplay &&<form onSubmit={handleSubmit2}>
                             <input type="text" placeholder='otp' onChange={changeotp}></input>
-                            <input type="submit" value="Submit"></input>
+                            <input type="submit" value="Verify Otp"></input>
                             {/* {submission && <button onClick={newuser} id="btn">Enroll new user</button>} */}
-                        </form>
-                        {submission && <input type="button" value="Enroll" onClick={newuser} id="btn" />}
+                        {submission && <input type="button" value="Enroll" onClick={newuser} id="btn" className='enroll-btn'/>}
+                        </form>}
                     </>
                 </div>
             </div>

@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { gapi } from 'gapi-script';
 import { useEffect } from 'react';
 
-const clientid = "879621168598-5k9okqkbnttkclniq1vh6gplie53notl.apps.googleusercontent.com";
+const clientid =process.env.REACT_APP_CLIENT_ID;
 
 const App = () => {
 
