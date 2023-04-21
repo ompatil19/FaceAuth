@@ -5,9 +5,33 @@ import Navbar from './Components/Navbar';
 import About from './Components/pages/About'
 import SignIn from './Components/SignIn'
 import LogIn from './Components/LogIn';
-import { BrowserRouter as Router, Routes , Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { gapi } from 'gapi-script';
+import { useEffect } from 'react';
+
+const clientid = "879621168598-5k9okqkbnttkclniq1vh6gplie53notl.apps.googleusercontent.com";
 
 const App = () => {
+
+  useEffect(() => {
+    function start() {
+      gapi.load('client:auth2', () => {
+        gapi.client.init({
+          clientId: clientid,
+          scope: ''
+        }).then(() => {
+          const authInstance = gapi.auth2.getAuthInstance();
+          authInstance.signOut().then(() => {
+            console.log('User signed out');
+          }).catch((err) => {
+            console.error(err);
+          });
+        });
+      });
+    };
+    start();
+  }, [clientid]);
+
   return (
     <>
       <Router>
@@ -15,7 +39,7 @@ const App = () => {
         <Routes>
           <Route path='/' exact Component={Home} />
           <Route path='/about' exact Component={About} />
-          <Route path='/sign-up' exact Component={SignIn}/>
+          <Route path='/sign-up' exact Component={SignIn} />
           <Route path='/login' exact Component={LogIn}></Route>
         </Routes>
       </Router>
