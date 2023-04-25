@@ -2,7 +2,6 @@ const nodemailer=require('nodemailer');
 const { google } = require('googleapis');
 const otpModel = require('./models/otp');
 require('dotenv').config();
-const { gmail } = require('googleapis/build/src/apis/gmail');
 
 const CLIENT_ID=process.env.CLIENT_ID;
 const CLIENT_SECRET=process.env.CLIENT_SECRET;
@@ -13,18 +12,18 @@ const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_U
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
 let otp = Math.floor(100000 + Math.random() * 900000);
 
+const accessToken =  oAuth2Client.getAccessToken();
 async function sendEmail(e,time){
     try{
-        const accessToken = await oAuth2Client.getAccessToken();
-        const transport=nodemailer.createTransport({
-            service:"gmail",
-            auth:{
-                type:"OAuth2",
-                user:process.env.USER,
-                clientid: CLIENT_ID,
-                clientsecret: CLIENT_SECRET,
-                //Have to keep updating access token every one hour
-                accessToken:accessToken
+        const transport= nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                type: "OAuth2",
+                user: process.env.USER,
+                clientId: CLIENT_ID,
+                clientSecret: CLIENT_SECRET,
+                refreshToken: REFRESH_TOKEN,
+                accessToken: accessToken
             }
         });
         const mailOptions={
@@ -34,9 +33,11 @@ async function sendEmail(e,time){
             text: "hello",
             html:`<h4> Hello! ${time.name} you have authenticated successfully at ${time.timestamp}</h4>`,
         }
-        const result=await transport.sendMail(mailOptions);
+        
+        await transport.sendMail(mailOptions);
 
-        return result;
+        res.send(console.log("HURRAY email sent successfully"))
+        
     }catch(error){
         return error;
     }
@@ -45,7 +46,7 @@ async function sendEmail(e,time){
 
 async function sendOtpVerificationEmail(email, res) {
     try {
-        const accessToken = await oAuth2Client.getAccessToken();
+        //const accessToken = await oAuth2Client.getAccessToken();
         let transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
@@ -58,7 +59,7 @@ async function sendOtpVerificationEmail(email, res) {
             }
         });
         const newOtpVerification = new otpModel({
-            //otp:await bcrypt.hash(otp, 10),
+            
             otp:otp,
             createdAt: Date.now(),
             expiresAt: Date.now() + 900000,
