@@ -6,8 +6,8 @@ import './SignIn.css'
 import faceIO from "@faceio/fiojs"
 const faceio = new faceIO("fioa5c19");
 
-// const clientid = "879621168598-5k9okqkbnttkclniq1vh6gplie53notl.apps.googleusercontent.com";
-const clientid =process.env.REACT_APP_CLIENT_ID;
+
+ const clientid =process.env.REACT_APP_CLIENT_ID;
 
 export default function Signin() {
 
@@ -172,7 +172,6 @@ export default function Signin() {
             event.preventDefault();
         console.log("submit clicked");
         createnewuser();
-        setotpDisplay(true);
     }
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -195,7 +194,7 @@ export default function Signin() {
                         <>
                         <form onSubmit={handleSubmit}>
                             <input type="text" placeholder='Enter your name: ' onChange={changename} />
-                            <input type="text" placeholder='Enter your password: ' onChange={changepass} />
+                            <input type="password" placeholder='Enter your password: ' onChange={changepass} />
                             <input type="text" placeholder='Enter your email: ' onChange={changemail} />
                             <input type="submit" value="Submit" id='btn' />
 

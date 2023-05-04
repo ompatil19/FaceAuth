@@ -8,7 +8,7 @@ const otpModel = require('./models/otp');
 const otp = require('./mail');
 const axios = require('axios');
 const cors = require('cors');
-mongoose.connect(process.env.DATABASE)
+mongoose.connect("process.env.DATABASE")
 app.use(express.json());
 app.use(cors());
 const bcrypt = require('bcrypt');
