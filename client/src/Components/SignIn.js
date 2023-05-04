@@ -4,7 +4,7 @@ import Axios from "axios";
 import '../App.css';
 import './SignIn.css'
 import faceIO from "@faceio/fiojs"
-const faceio = new faceIO("fioa33f3");
+const faceio = new faceIO("fioa5c19");
 
 // const clientid = "879621168598-5k9okqkbnttkclniq1vh6gplie53notl.apps.googleusercontent.com";
 const clientid =process.env.REACT_APP_CLIENT_ID;
@@ -178,6 +178,7 @@ export default function Signin() {
         event.preventDefault();
         console.log("submit clicked");
         sendveriotp(email);
+        setotpDisplay(true);
     }
 
     return (
