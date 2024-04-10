@@ -1,22 +1,9 @@
-// import React from 'react'
-// import '../Components/LogIn.css'
-
-// function LogIn() {
-//   return (
-//     <div>
-//       <button className='login' >Authenticate</button>
-//     </div>
-//   )
-// }
-
-// export default LogIn
-
-
 import React from 'react'
 import Axios from "axios";
 import '../Components/LogIn.css'
 import faceIO from "@faceio/fiojs"
 const faceio = new faceIO("fioab1bd");
+// const faceio = new faceIO("fioa00b1");
 export default function Login() {
 
   const authenticateuser = () => {
